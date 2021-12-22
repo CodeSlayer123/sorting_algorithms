@@ -12,6 +12,7 @@ void insertion_sort_list(listint_t **list)
 	listint_t *future;
 
 
+
 	while (head->next != NULL)
 	{
 		if (head->n > head->next->n)
