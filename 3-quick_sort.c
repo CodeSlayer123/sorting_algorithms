@@ -13,24 +13,6 @@ void quick_sort(int *array, size_t size)
 
 }
 /**
- * quickSort - quicksorts
- * @arr: the array
- * @low: low number
- * @high: high number
- * @size: size of array
- */
-void quickSort(int arr[], int low, int high, size_t size)
-{
-	int pi;
-
-	if (low < high)
-	{
-		pi = partition(arr, low, high, size);
-		quickSort(arr, low, pi - 1, size);
-		quickSort(arr, pi + 1, high, size);
-	}
-}
-/**
  * swap - swaps two elements of an array
  * @a: element one
  * @b: element two
@@ -72,4 +54,22 @@ int partition(int arr[], int low, int high, size_t size)
 	if (arr[i + 1] != tmp)
 		print_array(arr, size);
 	return (i + 1);
+}
+/**
+ * quickSort - quicksorts
+ * @arr: the array
+ * @low: low number
+ * @high: high number
+ * @size: size of array
+ */
+void quickSort(int arr[], int low, int high, size_t size)
+{
+	int pi;
+
+	if (low < high)
+	{
+		pi = partition(arr, low, high, size);
+		quickSort(arr, low, pi - 1, size);
+		quickSort(arr, pi + 1, high, size);
+	}
 }
