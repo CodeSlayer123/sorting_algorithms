@@ -1,60 +1,55 @@
 #include "sort.h"
-
 /**
  * quick_sort - sorts array of integers using quick sort
  * @array: array
  * @size: size
  * Return: nothing
  */
-int partition (int arr[], int low, int high);
-void quicksort(int a[], int p, int r);
+int partition (int arr[], int low, int high, size_t size);
+void quickSort(int arr[], int low, int high, size_t size);
 void swap(int *a, int *b);
 
 void quick_sort(int *array, size_t size)
 {
-	int first = array[0];
-	int last = array[size - 1];
 
-	quicksort(array, first, last);
-	print_array(array, size);
+	quickSort(array, 0, size - 1, size);
 }
 
-void quicksort(int array[], int first, int last)
+void quickSort(int arr[], int low, int high, size_t size)
 {
-	int q;
-
-	if (first < last)
-    {
-        q = partition(array, first, last);
-        quicksort(array, first, q - 1);
-        quicksort(array, q + 1, last);
-    }
-
-
+	if (low < high)
+	{
+		int pi = partition(arr, low, high, size);
+		quickSort(arr, low, pi - 1, size);
+		quickSort(arr, pi + 1, high, size);
+	}
 }
-int partition (int arr[], int low, int high)
-{
-    int pivot = arr[high];  // selecting last element as pivot
-    int i = (low - 1);  // index of smaller element
-
-
-    for (int j = low; j <= high- 1; j++)
-    {
-        // If the current element is smaller than or equal to pivot
-        if (arr[j] <= pivot)
-        {
-            i++;    // increment index of smaller element
-            swap(&arr[i], &arr[j]);
-        }
-    }
-    swap(&arr[i + 1], &arr[high]);
-	print_array(arr, arr[high + 1]);
-	return (i + 1);
-}
-
 void swap(int *a, int *b)
 {
-    int t = *a;
-    *a = *b;
-    *b = t;
+	int t = *a;
+	*a = *b;
+	*b = t;
+}
+int partition (int arr[], int low, int high, size_t size)
+{
+	int pivot = arr[high];
+	int i = (low - 1);
+	int tmp;
+
+	for (int j = low; j <= high- 1; j++)
+	{
+		if (arr[j] <= pivot)
+		{
+			i++;
+			tmp = arr[i];
+			swap(&arr[i], &arr[j]);
+			if (arr[i] != tmp)
+				print_array(arr, size);
+		}
+	}
+	tmp = arr[i + 1];
+	swap(&arr[i + 1], &arr[high]);
+	if (arr[i + 1] != tmp)
+		print_array(arr, size);
+	return (i + 1);
 }
