@@ -5,9 +5,6 @@
  * @size: size
  * Return: nothing
  */
-int partition (int arr[], int low, int high, size_t size);
-void quickSort(int arr[], int low, int high, size_t size);
-void swap(int *a, int *b);
 
 void quick_sort(int *array, size_t size)
 {
