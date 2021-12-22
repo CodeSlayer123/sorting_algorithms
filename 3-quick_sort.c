@@ -35,17 +35,17 @@ void swap(int *a, int *b)
 int partition(int arr[], int low, int high, size_t size)
 {
 	int pivot = arr[high];
-	int i = (low - 1);
-	int tmp;
+	int i = (low - 1), j, tmpi, tmpj, tmp;
 
-	for (int j = low; j <= high - 1; j++)
+	for (j = low; j <= high - 1; j++)
 	{
 		if (arr[j] <= pivot)
 		{
 			i++;
-			tmp = arr[i];
+			tmpi = arr[i];
+			tmpj = arr[j];
 			swap(&arr[i], &arr[j]);
-			if (arr[i] != tmp)
+			if (tmpi != arr[i] && tmpj != arr[j])
 				print_array(arr, size);
 		}
 	}
@@ -55,6 +55,7 @@ int partition(int arr[], int low, int high, size_t size)
 		print_array(arr, size);
 	return (i + 1);
 }
+
 /**
  * quickSort - quicksorts
  * @arr: the array
