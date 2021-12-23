@@ -7,28 +7,50 @@
  */
 void insertion_sort_list(listint_t **list)
 {
+	listint_t *savepoint = *list;
 	listint_t *head = *list;
+	listint_t *current;
 	listint_t *tmp;
-	listint_t *future;
-
-
 
 	while (head->next != NULL)
 	{
-		if (head->n > head->next->n)
+		while (1)
 		{
-			tmp = head;
-			future = head->next;
-			head = head->next;
-			future = tmp;
-			head->prev = future;
-
-			while ((*list)->next != NULL)
+			if (head->next == NULL)
+				return;
+			if (head->n > head->next->n)
 			{
-				printf("%d, ", (*list)->n);
-				*list = (*list)->next;
+				current = head->next;
+				tmp = head;
+				tmp->next = current->next;
+				current->next = tmp;
+				if (head->prev != NULL)
+				{
+					current->prev = tmp->prev;
+					tmp->prev->next = current;
+					tmp->prev = current;
+				}
+				else
+				{
+					current->prev = NULL;
+					tmp->prev = current;
+				}
+					head = head->prev;
+				if (head->prev != NULL)
+					head = head->prev;
+				while ((*list)->next != NULL)
+				{
+					printf("%d, ", (*list)->n);
+					*list = (*list)->next;
+				}
+				printf("\n");
+				*list = savepoint;
+			}
+			else
+			{
+				head = head->next;
+				break;
 			}
 		}
-
 	}
 }
