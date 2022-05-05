@@ -25,15 +25,15 @@ void merge_sorted_arrays(int *a, int l, int m, int r){
     int left_length = m - l + 1;
     int right_length = r - m;
 
-    int temp_left[left_length];
-    int temp_right[right_length];
+    int *temp_left = malloc(left_length * sizeof(int));
+    int *temp_right = malloc(right_length * sizeof(int));
     int i, j, k;
 
 
-    for (int i = 0; i < left_length; i++)
+    for (i = 0; i < left_length; i++)
         temp_left[i] = a[l + i];
 
-    for (int i = 0; i < right_length; i++)
+    for (i = 0; i < right_length; i++)
         temp_right[i] = a[m + 1 + i];
 
     for (i = 0, j = 0, k = l; k < r; k++)
@@ -52,5 +52,7 @@ void merge_sorted_arrays(int *a, int l, int m, int r){
             j++;
         }
     }
+    free(temp_left);
+    free(temp_right);
 }
 
