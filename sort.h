@@ -29,5 +29,7 @@ int partition(int arr[], int low, int high, size_t size);
 void quickSort(int arr[], int low, int high, size_t size);
 void swap(int *a, int *b);
 
-
+void merge_sort(int *array, size_t size);
+void merge_sort_rec(int *a, int l, int r);
+void merge_sorted_arrays(int *a, int l, int m, int r);
 #endif
