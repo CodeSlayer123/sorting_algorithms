@@ -2,75 +2,96 @@
 #include <stdlib.h>
 #include "sort.h"
 
-void merge_sort_rec(int *a, int l, int r, int *temp_left);
-void merge_sorted_arrays(int *a, int l, int m, int r, int *temp_left);
 
 
 void merge_sort(int *array, size_t size){
-    int *temp_left = malloc(size * sizeof(int));
+    int *temp;
 
-    if (size < 2){
-        free(temp_left);
-        return;
-    }
-    if (array == NULL){
-        free(temp_left);
-        return;
-    }
-
-    printf("%ld", size);
-    merge_sort_rec(array, 0, size - 1, temp_left);
-    free(temp_left);
+	if (size < 2)
+	{
+		return;
+	}
+	temp = (int *)malloc((size) * sizeof(int));
+	merge_sort_rec(array, 0, size - 1, temp);
+	free(temp);
 }
 void merge_sort_rec(int *a, int l, int r, int *temp_left){
     if (l < r)
-    {
+	{
+		int mid = (l + r - 1) / 2;
 
-        int m = l + (r -l) / 2;
-        merge_sort_rec(a, l, m, temp_left);
-        merge_sort_rec(a, m + 1, r, temp_left);
-        merge_sorted_arrays(a,l,m,r, temp_left);
-    }
+		merge_sort_rec(a, l, mid, temp_left);
+		merge_sort_rec(a, mid + 1, r, temp_left);
+		merge_sorted_arrays(a, l, mid, r, temp_left);
+	}
 }
 
 void merge_sorted_arrays(int *a, int l, int m, int r, int *temp_left){
 
 
-    int i = l;
-    int j = m + 1;
-    int k = 0;
-
-
-    while (i <= m && j <= r)
-    {
-        printf("%d\n", a[0]);
-        print_array(a, 10);
-
-        if (a[i] <= a[j])
+    int i = l, j = m + 1, k = 0;
+    int x;
+    printf("Merging...\n");
+    printf("[left]: ");
+    for (x = i; x < j; x++)
+	{
+		printf("%d", a[x]);
+		if (x < (j - 1))
         {
-            temp_left[k] = a[i];
-            i++;
-            k++;
+			printf(", ");
         }
-        else{
-            temp_left[k] = a[j];
-            j++;
-            k++;
+	}
+    printf("\n");
+    printf("[right]: ");
+    while (x < r + 1)
+	{
+		printf("%d", a[x]);
+		if (x < r)
+        {
+			printf(", ");
         }
-    }
-    while (i < m){
-        temp_left[k] = a[i];
-        k++;
-        i++;
-    }
-    while (j < r){
-        temp_left[k] = a[i];
-        k++;
-        i++;
-    }
-    for (i = l; i < r; i ++)
-        a[i] = temp_left[i - l];
-
-
-}
+        x++;
+	}
+	printf("\n");
+    while (i <= m && j <= r)
+	{
+		if (a[i] <= a[j])
+		{
+			temp_left[k] = a[i];
+			k++;
+			i++;
+		}
+		else
+		{
+			temp_left[k] = a[j];
+			k++;
+			j++;
+		}
+	}
+	while (i <= m)
+	{
+		temp_left[k] = a[i];
+		k++;
+		i++;
+	}
+	while (j <= r)
+	{
+		temp_left[k] = a[j];
+		k++;
+		j++;
+	}
+	for (i = l; i <= r; i += 1)
+	{
+		a[i] = temp_left[i - l];
+	}
+    printf("[Done]: ");
+    for (i = l; i <= r; i++)
+	{
+		a[i] = temp_left[i - l];
+		printf("%d", a[i]);
+		if (i != r)
+			printf(", ");
+		else
+			printf("\n");
+	}}
 
