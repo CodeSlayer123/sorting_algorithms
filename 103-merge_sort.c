@@ -7,13 +7,16 @@ void merge_sorted_arrays(int *a, int l, int m, int r, int *temp_left);
 
 
 void merge_sort(int *array, size_t size){
+    int *temp_left = malloc(size * sizeof(int));
+
     if (size < 2){
+        free(temp_left);
         return;
     }
     if (array == NULL){
+        free(temp_left);
         return;
     }
-    int *temp_left = malloc(size * sizeof(int));
 
     printf("%ld", size);
     merge_sort_rec(array, 0, size - 1, temp_left);
