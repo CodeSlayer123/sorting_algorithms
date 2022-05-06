@@ -7,6 +7,12 @@ void merge_sorted_arrays(int *a, int l, int m, int r, int *temp_left);
 
 
 void merge_sort(int *array, size_t size){
+    if (size < 2){
+        return;
+    }
+    if (array == NULL){
+        return;
+    }
     int *temp_left = malloc(size * sizeof(int));
 
     printf("%ld", size);
@@ -25,30 +31,43 @@ void merge_sort_rec(int *a, int l, int r, int *temp_left){
 }
 
 void merge_sorted_arrays(int *a, int l, int m, int r, int *temp_left){
-    int left_length = m - l + 1;
-    int right_length = r - m;
-
-    int i, j, k;
 
 
-    for (i = 0; i < left_length; i++)
-        temp_left[i] = a[l + i];
+    int i = l;
+    int j = m + 1;
+    int k = 0;
 
 
-    for (i = 0, j = 0, k = l; k < r; k++)
+    while (i <= m && j <= r)
     {
         printf("%d\n", a[0]);
         print_array(a, 10);
 
-
-        if (i < left_length && j >= right_length )
+        if (a[i] <= a[j])
         {
-            a[k] = temp_left[i];
+            temp_left[k] = a[i];
             i++;
+            k++;
         }
         else{
+            temp_left[k] = a[j];
             j++;
+            k++;
         }
     }
+    while (i < m){
+        temp_left[k] = a[i];
+        k++;
+        i++;
+    }
+    while (j < r){
+        temp_left[k] = a[i];
+        k++;
+        i++;
+    }
+    for (i = l; i < r; i ++)
+        a[i] = temp_left[i - l];
+
+
 }
 
