@@ -32,4 +32,8 @@ void swap(int *a, int *b);
 void merge_sort(int *array, size_t size);
 void merge_sort_rec(int *a, int l, int r, int *temp_left);
 void merge_sorted_arrays(int *a, int l, int m, int r, int *temp_left);
+
+void heap_sort(int *array, size_t size);
+void maxheapify(int a[], int n, int i, size_t size);
+
 #endif
