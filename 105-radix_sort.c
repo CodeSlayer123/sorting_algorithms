@@ -8,7 +8,6 @@
 int big(int ar[], int size) {
     int tmp = 0;
     int i;
-    // int length = 0;
     for (i = 0; i < size; i++) {
         if (ar[i]> tmp){
             tmp = ar[i];
